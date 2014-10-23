@@ -1,43 +1,91 @@
+// Global variables
 var fighting = true;
-var targetDamage = 0;
+var target1Damage = 0;
 var playerDamage = 0;
+var chosenPlayer;
 
-// Target movement
-// $(document).ready(function(){
-//   var targetPosition = $('.target').offset().left;
-//   $('.target').animate({ right: "0" }, 5000);
-//   $('.target').animate({ top: (Math.random() * 600), right: (Math.random() * 1000) }, 2000);
-//   $('.target').animate({ top: "400px" }, 2000);
-//   $('.target').animate({ top: "30px", right: '600px' }, 2000);
-// });
-$(document).ready(function(){
-  window.setInterval(function(){
-    $('.target').animate({ top: (Math.random() * 600), right: (Math.random() * 1000) }, 1000);
-  }, 0);
+// Constructors
+var Player = function(options){
+  options = options || {};
+  this.name = options.name;
+  this.health = 100;
+  this.damage = options.damage;
+  this.ammo = options.ammo;
+};
+
+var Animal = function(options){
+  options = options || {};
+  this.name = options.name;
+  this.health = options.health;
+  this.damage = options.damage;
+  this.speed = options.speed;
+};
+
+var Level = function(options){
+  options = options || {};
+  this.scene = options.scene;
+  this.player = options.player;
+  this.enemies = options.enemies;
+};
+
+// Define enemies
+var possum = new Animal({
+  name: 'possum',
+  health: 50,
+  damage: 30,
+  speed: 1000
 });
 
-// Attack every 3 seconds until dead
-var targetAttackInt = window.setInterval(function(){
-  // When attacked, random damge under 30 done and player turns red.
-  $('.player').css('background-color','red');
-  playerDamage += (Math.random() * 30);
-  console.log(playerDamage);
-  // if the target kills you, the timed attacks end
-  if(playerDamage >= 100){
-    clearInterval(targetAttackInt);
-    alert('You are dead!');
-  };
-}, 3000);
+// Define players
+var pistol = new Player({
+  name: 'pistol',
+  damage: 20,
+  ammo: 20
+});
 
-// Player attackes target
-$('.target').on('click', function(){
-  var target = this;
-  var player = $('.player');
-  $(target).css({'background-color': 'yellow', 'transition': 'background-color 1s'});
-  targetDamage += (Math.random() * 100);
-  console.log(targetDamage);
-  if(targetDamage >= 100){
-    $(target).css('background-color','red');
-    console.log('Target is dead!');
-  };
+// Define Levels
+var yard = new Level({
+  scene: 'yard',
+  player: chosenPlayer,
+  enemies: possum
+});
+
+// Fight
+$(document).ready(function(){
+  if(fighting){
+    // Target Movement
+    var targetMovement = window.setInterval(function(){
+      $('.target1').animate({ top: (Math.random() * 600), right: (Math.random() * 1000) }, 2000);
+    }, 0);
+    if(target1Damage >= 100){
+      clearInterval(targetMovement);
+      $(target).css('background-color','red');
+      console.log('Target is dead!');
+    };
+
+    // Attack every 3 seconds until dead
+    var targetAttackInt = window.setInterval(function(){
+      // When attacked, random damge under 30 done and player turns red.
+      playerDamage += (Math.random() * 30);
+      console.log(playerDamage);
+      // if the target kills you, the timed attacks end
+      if(playerDamage >= 100){
+        clearInterval(targetAttackInt);
+        $('.player').css('background-color','red');
+        console.log('You are dead!');
+      };
+    }, 3000);
+
+    // Player attackes target
+    $('.target1').on('mouseover', function(){
+      var target = this;
+      $('.target1').on('keypress', function(event){
+        event.preventDefault();
+        console.log("key pressed!");
+        // $(target).css({'background-position': '-636px 0', 'width': '340px'});
+        // target1Damage += (Math.random() * 100);
+        // console.log(target1Damage);
+      });
+    });
+  }
 });
