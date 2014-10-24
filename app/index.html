@@ -24,11 +24,34 @@
   <body>
 
     <div class="container">
-      <div class="obstacle1"></div>
-      <div class="obstacle2"></div>
-      <div class="target1"></div>
-      <div class="player"></div>
+      <div class="introduction">
+        <h1>This here game's bout shootin' vermin.</h1>
+        <p>Choose a weapon, kill em' dead. Them's mean though.</p>
+        <ul>
+          <li><button name="pistol" class="playerChoice">Pistol</button></li>
+          <li><button name="shotgun" class="playerChoice">Shotgun</button></li>
+          <li><button name="rifle" class="playerChoice">Assault Rifle</button></li>
+        </ul>
+      </div>
     </div>
+
+    <script id="start">
+      <div class="obstacle <%= name %>"></div>
+      <div class="target <%= name %>"></div>
+      <div class="player <%= name %>"></div>
+    </script>
+
+    <script id="fight">
+      <div class="obstacle"></div>
+      <div class="target"></div>
+      <div class="player"></div>
+    </script>
+
+    <script id="gameover">
+      <div class="obstacle <%= name %>"></div>
+      <div class="target <%= name %>"></div>
+      <div class="player <%= name %>"></div>
+    </script>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->

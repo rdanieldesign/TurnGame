@@ -11,14 +11,27 @@ body {
 }
 
 .container {
-  max-width: 1000px;
   width: 100%;
-  height: 600px;
+  height: 100%;
+  min-height: 600px;
   margin: 0 auto;
   position: relative;
+  border: 1px solid red;
 }
 
-.target1 {
+.introduction {
+
+width: 500px;
+margin: 50px auto;
+padding: 20px;
+text-align: center;
+background-color: lightgrey;
+
+  li {
+    display: inline-block;
+  }
+}
+.target {
   width: 300px;
   height: 196px;
   background-image: url('../images/possum-sprite.png');
@@ -30,7 +43,8 @@ body {
   z-index: 1;
 }
 
-.target2 {
+.deadTarget {
+  background-color: red;
   width: 300px;
   height: 196px;
   background-image: url('../images/possum-sprite.png');
@@ -51,7 +65,7 @@ body {
   z-index: 99;
 }
 
-.obstacle1 {
+.obstacle {
   width: 200px;
   height: 200px;
   background-color: yellow;
