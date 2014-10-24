@@ -4,11 +4,20 @@ var targetDamage = 0;
 var playerDamage = 0;
 var chosenPlayer;
 var currentLevel;
+var levelEnemies;
 var targeted;
 var winWidth = $(window).width();
 var winHeight = $(window).height();
 
+// Templates
+var fightTemp = $('#fight').html();
+var renderFightTemp = _.template(fightTemp);
+
+var gameoverTemp = $('#gameover').html();
+var rendergameoverTemp = _.template(gameoverTemp);
+
 // Constructors
+// Define players
 var Player = function(options){
   options = options || {};
   this.weapon = options.weapon;
@@ -17,6 +26,25 @@ var Player = function(options){
   this.ammo = options.ammo;
 };
 
+var pistol = new Player({
+  weapon: 'pistol',
+  damage: 20,
+  ammo: 20
+});
+
+var shotgun = new Player({
+  weapon: 'shotgun',
+  damage: 30,
+  ammo: 10
+});
+
+var rifle = new Player({
+  weapon: 'rifle',
+  damage: 50,
+  ammo: 5
+});
+
+// Define enemies
 var Target = function(options){
   options = options || {};
   this.species = options.species;
@@ -26,6 +54,21 @@ var Target = function(options){
   this.number = options.number || 0;
 };
 
+var possum = new Target({
+  species: 'possum',
+  health: 50,
+  damage: 30,
+  speed: 1000
+});
+
+var deer = new Target({
+  species: 'deer',
+  health: 100,
+  damage: 50,
+  speed: 1000
+});
+
+// Game setup
 var Game = function(options){
   options = options || {};
   this.scene = options.scene;
@@ -33,33 +76,10 @@ var Game = function(options){
   this.enemies = options.enemies;
 };
 
-// Define enemies
-var possum = new Target({
-  species: 'possum',
-  health: 50,
-  damage: 30,
-  speed: 1000,
-  number: 1
-});
-
-// Define players
-var pistol = new Player({
-  weapon: 'pistol',
-  damage: 20,
-  ammo: 20
-});
-
-// Templates
-var fightTemp = $('#fight').html();
-var renderFightTemp = _.template(fightTemp);
-
-var gameoverTemp = $('#gameover').html();
-var rendergameoverTemp = _.template(gameoverTemp);
-
 // Define Levels
 var level1 = new Game({
   scene: 'yard',
-  enemies: possum
+  enemies: [possum, possum]
 });
 
 // Setup
@@ -67,7 +87,6 @@ $('.playerChoice').on('click', function(){
   level1.weapon = $(this).attr('name');
   currentLevel = level1;
   $('.container').html(renderFightTemp(currentLevel));
-  var enemyDamage = currentLevel.enemies.damage;
   fight();
 });
 
@@ -76,8 +95,11 @@ var fight = function(){
   // Target Movement
   var targWidth = $('.target').width();
   var targHeight = $('.target').height();
+  var levelEnemies = currentLevel.enemies;
   var targMov = function(){
-    $('.target').animate({ top: Math.random() * (winHeight - targHeight), right: Math.random() * (winWidth - targWidth)});
+    for (var i in levelEnemies){
+      $('#enemy' + i).animate({ top: Math.random() * (winHeight - targHeight), right: Math.random() * (winWidth - targWidth)});
+    }
   };
   var targMovInt = setInterval(targMov, 500);
 
