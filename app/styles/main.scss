@@ -3,6 +3,11 @@
 @import '../../bower_components/neat/app/assets/stylesheets/neat';
 
 // Custom Styles
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -45,15 +50,6 @@ background-color: lightgrey;
 
 .deadTarget {
   background-color: red;
-  width: 300px;
-  height: 196px;
-  background-image: url('../images/possum-sprite.png');
-  background-position: 0 0;
-  transition: background-position 0s;
-  position: absolute;
-  top: 0;
-  right: 1000px;
-  z-index: 1;
 }
 
 .player {

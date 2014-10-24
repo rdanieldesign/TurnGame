@@ -3,7 +3,7 @@ var fight;
 var targetDamage = 0;
 var playerDamage = 0;
 var chosenPlayer;
-var chosenLevel;
+var currentLevel;
 var targeted;
 var winWidth = $(window).width();
 var winHeight = $(window).height();
@@ -64,10 +64,10 @@ var level1 = new Game({
 
 // Setup
 $('.playerChoice').on('click', function(){
-  chosenPlayer = $(this).attr('name');
-  level1.player = chosenPlayer;
-  $('.container').html(renderFightTemp(level1));
-  console.log(level1.player);
+  level1.weapon = $(this).attr('name');
+  currentLevel = level1;
+  $('.container').html(renderFightTemp(currentLevel));
+  var enemyDamage = currentLevel.enemies.damage;
   fight();
 });
 
@@ -79,7 +79,7 @@ var fight = function(){
   var targMov = function(){
     $('.target').animate({ top: Math.random() * (winHeight - targHeight), right: Math.random() * (winWidth - targWidth)});
   };
-  var targMovInt = setInterval(targMov, 1000);
+  var targMovInt = setInterval(targMov, 500);
 
   // Attack every 3 seconds until dead
   var targetAttackInt = setInterval(function(){
@@ -115,7 +115,7 @@ var fight = function(){
     if(targetDamage >= 100){
       clearInterval(targetAttackInt);
       clearInterval(targMovInt);
-      $('.target').removeClass('target').addClass('deadTarget');
+      $('.target').addClass('deadTarget');
       console.log('Target is dead!');
     }
   });
