@@ -44,16 +44,7 @@
     <script id="fight">
       <div class="obstacle"></div>
       <div class="target <%= enemy.species %>"></div>
-      <div class="player">
-        <% if(weapon === 'pistol'){ %>
-          <h1>Pistol</h1>
-        <% }; %>
-        <% if(weapon === 'shotgun'){ %>
-          <h1>Shotgun</h1>
-        <% }; %>
-        <% if(weapon === 'rifle'){ %>
-          <h1>Rifle</h1>
-        <% }; %>
+      <div class="player <% if(weapon === 'pistol'){ %> pistol <% }; %><% if(weapon === 'shotgun'){ %> shotgun <% }; %><% if(weapon === 'rifle'){ %>rifle<% }; %>">
       </div>
     </script>
 

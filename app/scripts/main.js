@@ -2,8 +2,16 @@
 var playerHealth;
 var chosenPlayer;
 var currentLevel;
-var winWidth = $(window).width();
-var winHeight = $(window).height();
+var winWidth;
+var winHeight;
+
+// Continuosly resize game window according to browser window size
+setInterval(function(){
+  winWidth = $(window).width();
+  winHeight = $(window).height();
+  // Set screen
+  $('.container').css({'width': winWidth + 'px', 'height': winHeight + 'px'})
+}, 0);
 
 // Templates
 var fightTemp = $('#fight').html();
@@ -142,7 +150,6 @@ var fight = function(){
       console.log('Target is dead!');
     }
   });
-
 
 };
 
