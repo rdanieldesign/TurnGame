@@ -42,6 +42,7 @@
     </script>
 
     <script id="fight">
+      <div class="attack attack-<%= enemy.species %>"></div>
       <div class="obstacle"></div>
       <div class="target <%= enemy.species %>"></div>
       <div class="player <% if(weapon === 'pistol'){ %> pistol <% }; %><% if(weapon === 'shotgun'){ %> shotgun <% }; %><% if(weapon === 'rifle'){ %>rifle<% }; %>">

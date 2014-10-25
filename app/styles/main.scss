@@ -59,6 +59,9 @@ body {
     background-color: white;
   }
 }
+
+// Fight
+
 .target {
   position: absolute;
   top: 0;
@@ -85,7 +88,7 @@ body {
   left: 0;
   right: 0;
   margin: 0 auto;
-  z-index: 99;
+  z-index: 3;
 }
 
 .shotgun {
@@ -106,4 +109,18 @@ body {
   top: 30px;
   right: 600px;
   z-index: 2;
+}
+
+.attack {
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-color: HSLA(0, 71%, 45%, .5);
+  position: absolute;
+  top: 0; bottom: 0; right: 0; left: 0;
+  z-index: 4;
+  display: none;
+}
+
+.attack-possum {
+  background-image: url('../images/possum-attack.png');
 }

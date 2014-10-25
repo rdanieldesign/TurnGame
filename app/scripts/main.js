@@ -112,6 +112,11 @@ var fight = function(){
   // Target Attacks on Interval
   var targAttackInt = setInterval(function(){
     playerHealth -= (Math.random() * targDamage);
+    // Show target attack screen when attacked, then remove
+    $('.attack').css('display', 'block');
+    setTimeout(function(){
+      $('.attack').css('display', 'none');;
+    }, 250);
     console.log(playerHealth);
     // If player dies, stop target movement & attacks and target turns red.
     if(playerHealth <= 0){
