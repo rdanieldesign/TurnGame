@@ -1,7 +1,8 @@
 // Global variables
 var playerHealth;
-var chosenPlayer;
+var chosenWeapon;
 var currentLevel;
+var currentLevelNum = 1;
 var winWidth;
 var winHeight;
 
@@ -100,16 +101,11 @@ var level2 = new Game({
   enemy: armadillo
 });
 
-var level1 = new Game({
-  scene: 'yard',
-  enemy: possum
-});
-
 var fight = function(){
 
   // Reset Health
   playerHealth = 100;
-  var targetHealth = level1.enemy.health;
+  var targetHealth = currentLevel.enemy.health;
   var playerDamage;
 
   // Fight Variables
@@ -125,6 +121,11 @@ var fight = function(){
   // Target Moves Randomly
   var targMoveInt = setInterval(function(){
     $(target).animate({ top: Math.random() * (winHeight - targHeight), right: Math.random() * (winWidth - targWidth)});
+    // Target run sprite
+    $(target).css('background-position', '0 0');
+    setTimeout(function(){
+      $(target).css('background-position', (0 - targWidth) + 'px' + ' 0');
+    }, 250);
   }, 500);
 
   // Target Attacks on Interval
@@ -161,7 +162,7 @@ var fight = function(){
         $(target).css({'background-position': '0 0', 'width': '300px'});
       }, 250);
       // Decrease target's health when shot
-      targetHealth -= (Math.random() * 10);
+      targetHealth -= (Math.random() * 1000);
       console.log(targetHealth);
     }
     // If you kill the target, it stops moving & attacking and turns red
@@ -170,6 +171,7 @@ var fight = function(){
       clearInterval(targMoveInt);
       $(target).addClass('deadTarget');
       $('.win').css('display', 'block');
+      currentLevelNum++;
       console.log('Target is dead!');
     }
   });
@@ -178,8 +180,18 @@ var fight = function(){
 
 // Setup
 $('.playerChoice').on('click', function(){
-  level1.weapon = $(this).attr('name');
-  currentLevel = level1;
+  currentLevel = window['level' + currentLevelNum];
+  chosenWeapon = $(this).attr('name');
+  currentLevel.weapon = chosenWeapon;
   $('.container').html(renderFightTemp(currentLevel));
-  fight(level1);
+  fight(currentLevel);
+});
+
+// Next Level
+$('.container').on('click', '.nextLevel', function(){
+  console.log("clicked!");
+  currentLevel = window['level' + currentLevelNum];
+  currentLevel.weapon = chosenWeapon;
+  $('.container').html(renderFightTemp(currentLevel));
+  fight(currentLevel);
 });
