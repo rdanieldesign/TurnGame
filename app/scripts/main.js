@@ -62,7 +62,15 @@ var possum = new Target({
   species: 'possum',
   health: 50,
   damage: 30,
-  speed: 1000,
+  speed: 2000,
+  targeted: false
+});
+
+var armadillo = new Target({
+  species: 'armadillo',
+  health: 200,
+  damage: 50,
+  speed: 3000,
   targeted: false
 });
 
@@ -82,6 +90,16 @@ var Game = function(options){
 };
 
 // Define Levels
+var level1 = new Game({
+  scene: 'yard',
+  enemy: possum
+});
+
+var level2 = new Game({
+  scene: 'yard',
+  enemy: armadillo
+});
+
 var level1 = new Game({
   scene: 'yard',
   enemy: possum
@@ -118,11 +136,10 @@ var fight = function(){
       $('.attack').css('display', 'none');;
     }, 250);
     console.log(playerHealth);
-    // If player dies, stop target movement & attacks and target turns red.
+    // If player dies, stop target attacks and display death modal.
     if(playerHealth <= 0){
       clearInterval(targAttackInt);
-      clearInterval(targMoveInt);
-      $('.player').css('background-color','red');
+      $('.death').css('display', 'block');
       console.log('You are dead!');
     };
   }, targSpeed);
@@ -152,6 +169,7 @@ var fight = function(){
       clearInterval(targAttackInt);
       clearInterval(targMoveInt);
       $(target).addClass('deadTarget');
+      $('.win').css('display', 'block');
       console.log('Target is dead!');
     }
   });

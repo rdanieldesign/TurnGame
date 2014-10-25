@@ -43,6 +43,14 @@
 
     <script id="fight">
       <div class="attack attack-<%= enemy.species %>"></div>
+      <div class="modal death">
+        <h1> You got mauled by a <%= enemy.species %>.</h1>
+        <a href="index.html"><button>Try Again</button></a>
+      </div>
+      <div class="modal win">
+        <h1> You wasted that <%= enemy.species %>.</h1>
+        <a href="#"><button>Next Level</button></a>
+      </div>
       <div class="obstacle"></div>
       <div class="target <%= enemy.species %>"></div>
       <div class="player <% if(weapon === 'pistol'){ %> pistol <% }; %><% if(weapon === 'shotgun'){ %> shotgun <% }; %><% if(weapon === 'rifle'){ %>rifle<% }; %>">

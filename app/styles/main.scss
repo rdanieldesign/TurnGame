@@ -124,3 +124,16 @@ body {
 .attack-possum {
   background-image: url('../images/possum-attack.png');
 }
+
+.modal {
+  background-color: HSLA(0, 71%, 45%, .7);
+  position: absolute;
+  top: 0; bottom: 0; right: 0; left: 0;
+  z-index: 4;
+  display: none;
+  text-align: center;
+
+  h1 {
+    color: white;
+  }
+}
