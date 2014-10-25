@@ -1,9 +1,7 @@
 // Global variables
-var fight;
-var playerHealth = 100;
+var playerHealth;
 var chosenPlayer;
 var currentLevel;
-var levelEnemy;
 var winWidth = $(window).width();
 var winHeight = $(window).height();
 
@@ -82,12 +80,76 @@ var level1 = new Game({
 });
 
 var fight = function(){
+
+  // Reset Health
+  playerHealth = 100;
+  var targetHealth = level1.enemy.health;
+  var playerDamage;
+
+  // Fight Variables
+  var fighting = true;
   var levelEnemy = level1.enemy;
+  var target = $('.target');
+  var isTargeted = false;
+  var targHeight = $('.target').height();
+  var targWidth = $('.target').width();
+  var targSpeed = level1.enemy.speed;
+  var targDamage = level1.enemy.damage;
+
+  // Target Moves Randomly
+  var targMoveInt = setInterval(function(){
+    $(target).animate({ top: Math.random() * (winHeight - targHeight), right: Math.random() * (winWidth - targWidth)});
+  }, 500);
+
+  // Target Attacks on Interval
+  var targAttackInt = setInterval(function(){
+    playerHealth -= (Math.random() * targDamage);
+    console.log(playerHealth);
+    // If player dies, stop target movement & attacks and target turns red.
+    if(playerHealth <= 0){
+      clearInterval(targAttackInt);
+      clearInterval(targMoveInt);
+      $('.player').css('background-color','red');
+      console.log('You are dead!');
+    };
+  }, targSpeed);
+
+  // Detect if Player is aiming at Target
+  $(target).mouseenter(function(){
+    isTargeted = true;
+  }).mouseleave(function(){
+    isTargeted = false;
+  });
+
+  // If Target is targeted, enable shooting with keypress
+  $(document).keypress(function(event){
+    event.preventDefault();
+    if(isTargeted){
+      // Shift to shot-view and quickly back
+      $(target).css({'background-position': '-636px 0', 'width': '340px'});
+      setTimeout(function(){
+        $(target).css({'background-position': '0 0', 'width': '300px'});
+      }, 250);
+      // Decrease target's health when shot
+      targetHealth -= (Math.random() * 10);
+      console.log(targetHealth);
+    }
+    // If you kill the target, it stops moving & attacking and turns red
+    if(targetHealth <= 0){
+      clearInterval(targAttackInt);
+      clearInterval(targMoveInt);
+      $(target).addClass('deadTarget');
+      console.log('Target is dead!');
+    }
+  });
+
+
 };
 
 // Setup
 $('.playerChoice').on('click', function(){
   level1.weapon = $(this).attr('name');
-  fight(level1);
+  currentLevel = level1;
   $('.container').html(renderFightTemp(currentLevel));
+  fight(level1);
 });

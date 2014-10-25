@@ -43,9 +43,7 @@
 
     <script id="fight">
       <div class="obstacle"></div>
-      <% for (var i = 0; i < enemies.length; i++){ %>
-      <div class="target <%= enemies[i].species %>" id="<%= 'enemy' + i %>"></div>
-      <% }; %>
+      <div class="target <%= enemy.species %>"></div>
       <div class="player">
         <% if(weapon === 'pistol'){ %>
           <h1>Pistol</h1>
