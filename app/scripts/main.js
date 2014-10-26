@@ -1,5 +1,6 @@
 // Global variables
 var playerHealth;
+var playerDamage;
 var chosenWeapon;
 var currentLevel;
 var currentLevelNum = 1;
@@ -7,13 +8,13 @@ var winWidth;
 var winHeight;
 
 // Fight variables
-var fighting;
 var levelEnemy;
 var target;
 var isTargeted;
 var targHeight;
 var targWidth;
 var targSpeed;
+var targetHealth;
 var targDamage;
 var targAttackInt;
 var targMoveInt;
@@ -37,26 +38,26 @@ var rendergameoverTemp = _.template(gameoverTemp);
 // Define players
 var Player = function(options){
   options = options || {};
-  this.weapon = options.weapon;
+  this.name = options.name;
   this.health = 100;
   this.damage = options.damage;
   this.ammo = options.ammo;
 };
 
 var pistol = new Player({
-  weapon: 'pistol',
+  name: 'pistol',
   damage: 20,
   ammo: 20
 });
 
 var shotgun = new Player({
-  weapon: 'shotgun',
+  name: 'shotgun',
   damage: 30,
   ammo: 10
 });
 
 var rifle = new Player({
-  weapon: 'rifle',
+  name: 'rifle',
   damage: 50,
   ammo: 5
 });
@@ -120,20 +121,20 @@ var level3 = new Game({
 
 var fight = function(){
 
+  // Reset Enemy
+  levelEnemy = currentLevel.enemy;
+
   // Reset Health
   playerHealth = 100;
-  var targetHealth = currentLevel.enemy.health;
-  var playerDamage;
+  targetHealth = levelEnemy.health;
 
   // Fight Variables
-  fighting = true;
-  levelEnemy = currentLevel.enemy;
   target = $('.target');
   isTargeted = false;
   targHeight = $('.target').height();
   targWidth = $('.target').width();
-  targSpeed = currentLevel.enemy.speed;
-  targDamage = currentLevel.enemy.damage;
+  targSpeed = levelEnemy.speed;
+  targDamage = levelEnemy.damage;
 
   // Target Moves Randomly
   targMoveInt = setInterval(function(){
@@ -147,7 +148,7 @@ var fight = function(){
 
   // Target Attacks on Interval
   targAttackInt = setInterval(function(){
-    playerHealth -= (Math.random() * targDamage);
+    playerHealth -= targDamage;
     // Show target attack screen when attacked, then remove
     $('.attack').css('display', 'block');
     setTimeout(function(){
@@ -179,7 +180,7 @@ var fight = function(){
         $(target).css('background-position', '0 0');
       }, 250);
       // Decrease target's health when shot
-      targetHealth -= (Math.random() * 1000);
+      targetHealth -= chosenWeapon.damage;
       console.log(targetHealth);
     }
     // If you kill the target, it stops moving & attacking and turns red
@@ -200,8 +201,9 @@ var fight = function(){
 
 // Setup
 $('.playerChoice').on('click', function(){
+  var weaponClicked = $(this).attr('name');
   currentLevel = window['level' + currentLevelNum];
-  chosenWeapon = $(this).attr('name');
+  chosenWeapon = window[weaponClicked];
   currentLevel.weapon = chosenWeapon;
   $('.container').html(renderFightTemp(currentLevel));
   fight(currentLevel);

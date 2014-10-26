@@ -30,7 +30,7 @@
         <ul>
           <li><button name="pistol" class="playerChoice">Pistol</button></li>
           <li><button name="shotgun" class="playerChoice">Shotgun</button></li>
-          <li><button name="rifle" class="playerChoice">Assault Rifle</button></li>
+          <li><button name="rifle" class="playerChoice">Rifle</button></li>
         </ul>
       </div>
     </div>
@@ -57,7 +57,7 @@
       </div>
       <div class="obstacle"></div>
       <div class="target <%= enemy.species %>"></div>
-      <div class="player <% if(weapon === 'pistol'){ %> pistol <% }; %><% if(weapon === 'shotgun'){ %> shotgun <% }; %><% if(weapon === 'rifle'){ %>rifle<% }; %>">
+      <div class="player <% if(weapon.name === 'pistol'){ %> pistol <% }; %><% if(weapon.name === 'shotgun'){ %> shotgun <% }; %><% if(weapon.name === 'rifle'){ %>rifle<% }; %>">
       </div>
     </script>
 
