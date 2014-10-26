@@ -8,6 +8,11 @@ ul, li {
   padding: 0;
 }
 
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: lightgrey;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -20,7 +25,6 @@ body {
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  padding: 20px;
   position: relative;
   background-color: white;
 }
@@ -39,6 +43,7 @@ body {
 
   h1 {
     font-size: 4em;
+    margin: .67em 0;
   }
 
   p {
@@ -135,7 +140,7 @@ body {
 }
 
 .modal {
-  background-color: HSLA(0, 71%, 45%, .7);
+  background-color: HSLA(107, 39%, 54%, .7);
   position: absolute;
   top: 0; bottom: 0; right: 0; left: 0;
   z-index: 4;
@@ -145,4 +150,75 @@ body {
   h2 {
     color: white;
   }
+}
+
+.death {
+  background-color: HSLA(0, 71%, 45%, .7);
+}
+
+// Stats Bar
+
+.stats {
+  position: absolute;
+  height: 15%;
+  width: 100%;
+  padding: 1% 5%;
+  bottom: 0; right: 0; left: 0;
+  background-color: gray;
+  overflow: auto;
+  text-align: center;
+
+  h3 {
+    font-size: 1.6em;
+    color: black;
+    margin-bottom: 10px;
+  }
+
+  .playerStats {
+    float: left;
+  }
+
+  .targetStats {
+    float: right;
+  }
+}
+
+.stats > div {
+  width: 20%;
+}
+
+.healthBar {
+  width: 100%;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 3px;
+  background-color: white;
+  overflow: auto;
+}
+
+.redline {
+  float: left;
+  background-color: red;
+  height: 100%;
+  width: 100%;
+}
+
+// Level scenery
+
+.background {
+  height: 100%;
+  width: 100%;
+  background-size: 100%;
+}
+
+.background-yard {
+  background-image: url("../images/trailer1.jpg");
+}
+
+.background-desert {
+  background-image: url("../images/trailer2.jpg");
+}
+
+.background-road {
+  background-image: url("../images/trailer3.jpg");
 }

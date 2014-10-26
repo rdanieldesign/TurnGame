@@ -28,9 +28,9 @@
         <h1>This here's a game bout shootin' vermin.</h1>
         <p>Choose a weapon, kill em' dead.</p>
         <ul>
-          <li><button name="pistol" class="playerChoice">Pistol</button></li>
-          <li><button name="shotgun" class="playerChoice">Shotgun</button></li>
-          <li><button name="rifle" class="playerChoice">Rifle</button></li>
+          <li><button name="pistol" class="playerChoice nextLevel">Pistol</button></li>
+          <li><button name="shotgun" class="playerChoice nextLevel">Shotgun</button></li>
+          <li><button name="rifle" class="playerChoice nextLevel">Rifle</button></li>
         </ul>
       </div>
     </div>
@@ -42,22 +42,47 @@
     </script>
 
     <script id="fight">
-      <div class="attack attack-<%= enemy.species %>"></div>
-      <div class="modal death">
-        <h2> You got mauled by a <%= enemy.species %>.</h2>
-        <a href="index.html"><button>Try Again</button></a>
-      </div>
-      <div class="modal win">
-        <h2> You wasted that <%= enemy.species %>.</h2>
-        <button class="nextLevel">Next Level</button>
-      </div>
-      <div class="modal finale">
-        <h2> Congratulations! You wasted that <%= enemy.species %> and successfully rid the trailer park of all wildlife.</h2>
-        <a href="index.html"><button>Play Again</button></a>
-      </div>
-      <div class="obstacle"></div>
-      <div class="target <%= enemy.species %>"></div>
-      <div class="player <% if(weapon.name === 'pistol'){ %> pistol <% }; %><% if(weapon.name === 'shotgun'){ %> shotgun <% }; %><% if(weapon.name === 'rifle'){ %>rifle<% }; %>">
+      <div class="background background-<%= scene %>">
+        <div class="attack attack-<%= enemy.species %>"></div>
+        <div class="modal death">
+          <h2> You got mauled by a <%= enemy.species %>.</h2>
+          <a href="index.html"><button>Try Again</button></a>
+        </div>
+        <div class="modal win">
+          <h2> You wasted that <%= enemy.species %>.</h2>
+          <button class="nextLevel">Next Level</button>
+        </div>
+        <div class="modal finale">
+          <h2> Congratulations! You wasted that <%= enemy.species %> and successfully rid the trailer park of all wildlife.</h2>
+          <a href="index.html"><button>Play Again</button></a>
+        </div>
+        <div class="obstacle"></div>
+        <div class="target <%= enemy.species %>"></div>
+        <div class="player">
+         <% if(weapon.name === 'pistol'){ %>
+           <img src="images/pistol.jpg" alt="">
+         <% }; %>
+         <% if(weapon.name === 'shotgun'){ %>
+           <img src="images/shotgun.jpg" alt="">
+         <% }; %>
+         <% if(weapon.name === 'rifle'){ %>
+           <img src="images/rifle.jpg" alt="">
+         <% }; %>
+        </div>
+        <div class="stats">
+          <div class="playerStats">
+            <h3>your health</h3>
+            <div class="healthBar">
+              <div class="redline"></div>
+            </div>
+          </div>
+          <div class="targetStats">
+            <h3><%= enemy.species %> health</h3>
+            <div class="healthBar">
+              <div class="redline"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </script>
 
