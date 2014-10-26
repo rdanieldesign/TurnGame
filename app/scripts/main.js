@@ -42,25 +42,21 @@ var Player = function(options){
   this.name = options.name;
   this.health = 100;
   this.damage = options.damage;
-  this.ammo = options.ammo;
 };
 
 var pistol = new Player({
   name: 'pistol',
-  damage: 20,
-  ammo: 20
+  damage: 15
 });
 
 var shotgun = new Player({
   name: 'shotgun',
-  damage: 30,
-  ammo: 10
+  damage: 25
 });
 
 var rifle = new Player({
   name: 'rifle',
-  damage: 50,
-  ammo: 5
+  damage: 40
 });
 
 // Define enemy
@@ -72,33 +68,37 @@ var Target = function(options){
   this.damage = options.damage;
   this.speed = options.speed;
   this.targeted = options.targeted;
+  this.deathWord = options.deathWord;
 };
 
 var possum = new Target({
   species: 'possum',
-  health: 50,
-  maxHealth: 50,
-  damage: 30,
+  health: 100,
+  maxHealth: 100,
+  damage: 20,
   speed: 2000,
-  targeted: false
+  targeted: false,
+  deathWord: 'wasted'
 });
 
 var armadillo = new Target({
   species: 'armadillo',
-  health: 100,
-  maxHealth: 100,
+  health: 200,
+  maxHealth: 200,
   damage: 50,
   speed: 3000,
-  targeted: false
+  targeted: false,
+  deathWord: 'destroyed'
 });
 
 var deer = new Target({
   species: 'deer',
-  health: 100,
-  maxHealth: 100,
-  damage: 50,
-  speed: 2000,
-  targeted: false
+  health: 400,
+  maxHealth: 400,
+  damage: 40,
+  speed: 1500,
+  targeted: false,
+  deathWord: 'annihilated'
 });
 
 // Game setup

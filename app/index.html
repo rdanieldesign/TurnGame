@@ -55,14 +55,14 @@
         </div>
         <div class="fightModal win">
           <div class="modal-container">
-            <h2> You wasted that <%= enemy.species %>.</h2>
+            <h2> You <%= enemy.deathWord %> that <%= enemy.species %>.</h2>
             <button class="nextLevel">Next Level</button>
           </div>
         </div>
         <div class="fightModal finale">
           <div class="modal-container">
             <h2> Congratulations!</h2>
-            <p>You wasted that <%= enemy.species %> and successfully rid the trailer park of all wildlife.</p>
+            <p>You <%= enemy.deathWord %> that <%= enemy.species %> and successfully rid the trailer park of all wildlife.</p>
             <a href="index.html"><button>Play Again</button></a>
           </div>
         </div>
