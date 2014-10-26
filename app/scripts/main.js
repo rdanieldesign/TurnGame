@@ -85,8 +85,8 @@ var possum = new Target({
 
 var armadillo = new Target({
   species: 'armadillo',
-  health: 400,
-  maxHealth: 400,
+  health: 100,
+  maxHealth: 100,
   damage: 50,
   speed: 3000,
   targeted: false
@@ -94,10 +94,10 @@ var armadillo = new Target({
 
 var deer = new Target({
   species: 'deer',
-  health: 600,
-  maxHealth: 600,
+  health: 100,
+  maxHealth: 100,
   damage: 50,
-  speed: 1000,
+  speed: 2000,
   targeted: false
 });
 
@@ -174,7 +174,7 @@ var fight = function(){
     $('.attack').css('display', 'block');
     setTimeout(function(){
       $('.attack').css('display', 'none');
-    }, 250);
+    }, 500);
     // Reduce player healthbar
     $('.playerStats .redline').css('width', playerHealth + '%');
     // If player dies, stop target attacks and display death modal.
@@ -201,8 +201,8 @@ var fight = function(){
       setTimeout(function(){
         $(target).css('background-position', '0 0');
       }, 250);
-      // Decrease target's health when shot
-      targetHealth -= currentLevel.weapon.damage;
+      // Decrease target's health when shot (Divided by level number - needs fix)
+      targetHealth -= (currentLevel.weapon.damage / currentLevelNum);
       // Reduce target health bar
       $('.targetStats .redline').css('width', ((targetHealth / levelEnemy.maxHealth) * 100) + '%');
     }
