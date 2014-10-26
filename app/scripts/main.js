@@ -69,6 +69,7 @@ var Target = function(options){
   this.speed = options.speed;
   this.targeted = options.targeted;
   this.deathWord = options.deathWord;
+  this.extraN = options.extraN;
 };
 
 var possum = new Target({
@@ -78,7 +79,8 @@ var possum = new Target({
   damage: 20,
   speed: 2000,
   targeted: false,
-  deathWord: 'wasted'
+  deathWord: 'wasted',
+  extraN: ' '
 });
 
 var armadillo = new Target({
@@ -88,7 +90,8 @@ var armadillo = new Target({
   damage: 50,
   speed: 3000,
   targeted: false,
-  deathWord: 'destroyed'
+  deathWord: 'destroyed',
+  extraN: 'n '
 });
 
 var deer = new Target({
@@ -98,7 +101,8 @@ var deer = new Target({
   damage: 40,
   speed: 1500,
   targeted: false,
-  deathWord: 'annihilated'
+  deathWord: 'annihilated',
+  extraN: ' '
 });
 
 // Game setup
@@ -163,7 +167,7 @@ var fight = function(){
     // Target run sprite
     $(target).css('background-position', '0 0');
     setTimeout(function(){
-      $(target).css('background-position', '-100% 0');
+      $(target).css('background-position', '33% 0');
     }, 250);
   }, 500);
 
@@ -179,7 +183,7 @@ var fight = function(){
     $('.playerStats .redline').css('width', playerHealth + '%');
     // If player dies, stop target attacks and display death modal.
     if(playerHealth <= 0){
-      clearInterval(targAttackInt);
+      window.clearInterval(targAttackInt);
       $('.death').css('display', 'block');
       console.log('You are dead!');
     }
@@ -193,11 +197,11 @@ var fight = function(){
   });
 
   // If Target is targeted, enable shooting with keypress
-  $(window).keypress(function(event){
+  var attack = $(window).keypress(function(event){
     event.preventDefault();
     if(isTargeted){
       // Shift to shot-view and quickly back
-      $(target).css('background-position', '-200% 0');
+      $(target).css('background-position', '67% 0');
       setTimeout(function(){
         $(target).css('background-position', '0 0');
       }, 250);
@@ -206,11 +210,13 @@ var fight = function(){
       // Reduce target health bar
       $('.targetStats .redline').css('width', ((targetHealth / levelEnemy.maxHealth) * 100) + '%');
     }
-    // If you kill the target, it stops moving & attacking and turns red
+    // If you kill the target, it stops moving & attacking and turns upside down
     if(targetHealth <= 0){
-      clearInterval(targAttackInt);
-      clearInterval(targMoveInt);
-      $(target).css('background-position', '-300% 0');
+      window.clearInterval(targAttackInt);
+      window.clearInterval(targMoveInt);
+      setTimeout(function(){
+        $(target).css('background-position', '100% 0');
+      }, 250);
       if (currentLevelNum !== 3){
         $('.win').css('display', 'block');
       }
@@ -219,5 +225,4 @@ var fight = function(){
       }
     }
   });
-
 };

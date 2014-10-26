@@ -28,7 +28,7 @@
         <div class="modal-container">
           <h1>This here's a game bout shootin' vermin.</h1>
           <img src="images/skull.svg" alt="">
-          <p>Choose a weapon, kill em' dead.</p>
+          <p>Choose a weapon, kill em' dead. Press any key to fire.</p>
           <ul>
             <li><button name="pistol" class="playerChoice nextLevel">Pistol</button></li>
             <li><button name="shotgun" class="playerChoice nextLevel">Shotgun</button></li>
@@ -49,7 +49,7 @@
         <div class="attack attack-<%= enemy.species %>"></div>
         <div class="fightModal death">
           <div class="modal-container">
-            <h2> You got mauled by a <%= enemy.species %>.</h2>
+            <h2> You got mauled by a<%= enemy.extraN %><%= enemy.species %>.</h2>
             <a href="index.html"><button>Try Again</button></a>
           </div>
         </div>
