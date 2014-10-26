@@ -47,19 +47,19 @@
     <script id="fight">
       <div class="background background-<%= scene %>">
         <div class="attack attack-<%= enemy.species %>"></div>
-        <div class="modal death">
+        <div class="fightModal death">
           <div class="modal-container">
             <h2> You got mauled by a <%= enemy.species %>.</h2>
             <a href="index.html"><button>Try Again</button></a>
           </div>
         </div>
-        <div class="modal win">
+        <div class="fightModal win">
           <div class="modal-container">
             <h2> You wasted that <%= enemy.species %>.</h2>
             <button class="nextLevel">Next Level</button>
           </div>
         </div>
-        <div class="modal finale">
+        <div class="fightModal finale">
           <div class="modal-container">
             <h2> Congratulations!</h2>
             <p>You wasted that <%= enemy.species %> and successfully rid the trailer park of all wildlife.</p>

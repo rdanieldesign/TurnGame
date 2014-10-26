@@ -81,10 +81,10 @@ body {
     display: inline-block;
     margin: 5px;
     width: 30%;
-    font-size: 1.4em;
   }
 
   button {
+    font-size: 1.4em;
     color: white;
     font-weight: bold;
     text-transform: uppercase;
@@ -102,12 +102,28 @@ body {
   }
 }
 
-.modal {
+.fightModal {
   background-color: HSLA(107, 39%, 54%, .7);
   position: absolute;
   top: 0; bottom: 0; right: 0; left: 0;
   z-index: 4;
   display: none;
+
+  .modal-container {
+    height: 300px;
+
+    button {
+      width: 60%;
+      position: absolute;
+      bottom: 40px; right: 0; left: 0;
+      margin: 0 auto;
+    }
+
+    p {
+      font-size: 1.8em;
+      line-height: 1.4em;
+    }
+  }
 }
 
 .death {
@@ -157,7 +173,7 @@ body {
 
 .redline {
   float: left;
-  background-color: red;
+  background-color: HSLA(0, 71%, 45%, 1);
   height: 100%;
   width: 100%;
 }
