@@ -67,25 +67,26 @@ body {
   top: 0;
   right: 0;
   z-index: 1;
+  background-size: 400%;
+  background-position: 0 0;
 }
 
 .possum {
   width: 300px;
   height: 196px;
-  background-image: url('../images/possum-sprite.png');
-  background-position: 0 0;
+  background-image: url('../images/possum.png');
 }
 
 .armadillo {
   width: 300px;
   height: 196px;
   background-image: url('../images/armadillo.png');
-  background-size: 400%;
-  background-position: 0 0;
 }
 
-.deadTarget {
-  background-color: red;
+.deer{
+  width: 300px;
+  height: 375px;
+  background-image: url('../images/deer.png');
 }
 
 .player {
@@ -141,7 +142,7 @@ body {
   display: none;
   text-align: center;
 
-  h1 {
+  h2 {
     color: white;
   }
 }

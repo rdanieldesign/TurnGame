@@ -6,6 +6,18 @@ var currentLevelNum = 1;
 var winWidth;
 var winHeight;
 
+// Fight variables
+var fighting;
+var levelEnemy;
+var target;
+var isTargeted;
+var targHeight;
+var targWidth;
+var targSpeed;
+var targDamage;
+var targAttackInt;
+var targMoveInt;
+
 // Continuosly resize game window according to browser window size
 setInterval(function(){
   winWidth = $(window).width();
@@ -101,6 +113,11 @@ var level2 = new Game({
   enemy: armadillo
 });
 
+var level3 = new Game({
+  scene: 'yard',
+  enemy: deer
+});
+
 var fight = function(){
 
   // Reset Health
@@ -109,27 +126,27 @@ var fight = function(){
   var playerDamage;
 
   // Fight Variables
-  var fighting = true;
-  var levelEnemy = level1.enemy;
-  var target = $('.target');
-  var isTargeted = false;
-  var targHeight = $('.target').height();
-  var targWidth = $('.target').width();
-  var targSpeed = level1.enemy.speed;
-  var targDamage = level1.enemy.damage;
+  fighting = true;
+  levelEnemy = currentLevel.enemy;
+  target = $('.target');
+  isTargeted = false;
+  targHeight = $('.target').height();
+  targWidth = $('.target').width();
+  targSpeed = currentLevel.enemy.speed;
+  targDamage = currentLevel.enemy.damage;
 
   // Target Moves Randomly
-  var targMoveInt = setInterval(function(){
+  targMoveInt = setInterval(function(){
     $(target).animate({ top: Math.random() * (winHeight - targHeight), right: Math.random() * (winWidth - targWidth)});
     // Target run sprite
     $(target).css('background-position', '0 0');
     setTimeout(function(){
-      $(target).css('background-position', (0 - targWidth) + 'px' + ' 0');
+      $(target).css('background-position', '-100% 0');
     }, 250);
   }, 500);
 
   // Target Attacks on Interval
-  var targAttackInt = setInterval(function(){
+  targAttackInt = setInterval(function(){
     playerHealth -= (Math.random() * targDamage);
     // Show target attack screen when attacked, then remove
     $('.attack').css('display', 'block');
@@ -157,9 +174,9 @@ var fight = function(){
     event.preventDefault();
     if(isTargeted){
       // Shift to shot-view and quickly back
-      $(target).css({'background-position': '-636px 0', 'width': '340px'});
+      $(target).css('background-position', '-200% 0');
       setTimeout(function(){
-        $(target).css({'background-position': '0 0', 'width': '300px'});
+        $(target).css('background-position', '0 0');
       }, 250);
       // Decrease target's health when shot
       targetHealth -= (Math.random() * 1000);
@@ -167,12 +184,15 @@ var fight = function(){
     }
     // If you kill the target, it stops moving & attacking and turns red
     if(targetHealth <= 0){
+      $(target).css('background-position', '-300% 0');
       clearInterval(targAttackInt);
       clearInterval(targMoveInt);
-      $(target).addClass('deadTarget');
-      $('.win').css('display', 'block');
-      currentLevelNum++;
-      console.log('Target is dead!');
+      if (currentLevelNum !== 3){
+        $('.win').css('display', 'block');
+      }
+      else {
+        $('.finale').css('display', 'block');
+      }
     }
   });
 
@@ -189,7 +209,7 @@ $('.playerChoice').on('click', function(){
 
 // Next Level
 $('.container').on('click', '.nextLevel', function(){
-  console.log("clicked!");
+  currentLevelNum++;
   currentLevel = window['level' + currentLevelNum];
   currentLevel.weapon = chosenWeapon;
   $('.container').html(renderFightTemp(currentLevel));

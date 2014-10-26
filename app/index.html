@@ -44,12 +44,16 @@
     <script id="fight">
       <div class="attack attack-<%= enemy.species %>"></div>
       <div class="modal death">
-        <h1> You got mauled by a <%= enemy.species %>.</h1>
+        <h2> You got mauled by a <%= enemy.species %>.</h2>
         <a href="index.html"><button>Try Again</button></a>
       </div>
       <div class="modal win">
-        <h1> You wasted that <%= enemy.species %>.</h1>
+        <h2> You wasted that <%= enemy.species %>.</h2>
         <button class="nextLevel">Next Level</button>
+      </div>
+      <div class="modal finale">
+        <h2> Congratulations! You wasted that <%= enemy.species %> and successfully rid the trailer park of all wildlife.</h2>
+        <a href="index.html"><button>Play Again</button></a>
       </div>
       <div class="obstacle"></div>
       <div class="target <%= enemy.species %>"></div>
