@@ -13,6 +13,10 @@ h1, h2, h3 {
   padding: 0;
 }
 
+button {
+  border: none;
+}
+
 body {
   background: lightgrey;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -46,8 +50,8 @@ body {
   height: 350px;
   margin: auto;
   padding: 20px 30px;
-  border: 3px solid black;
-  border-radius: 4px;
+  border: 3px solid white;
+  border-radius: 6px;
   text-align: center;
   background-color: HSLA(0, 10%, 4%, .8);
   position: absolute;
@@ -56,12 +60,16 @@ body {
 
   h1 {
     font-size: 4em;
-    margin: .5em 0 .7em 0;
+    margin: .5em 0 .5em 0;
   }
 
   h2 {
     font-size: 4em;
     margin: .67em 0;
+  }
+
+  img {
+    height: 40px;
   }
 
   p {
@@ -77,13 +85,20 @@ body {
   }
 
   button {
-    color: black;
+    color: white;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     padding: 10px;
     width: 100%;
+    border: 1px solid white;
+    background-color: HSLA(0, 10%, 4%, 0);
     border-radius: 4px;
-    border: 1px solid black;
-    background-color: white;
+
+    &:hover {
+      color: black;
+      background-color: white;
+    }
   }
 }
 
@@ -98,6 +113,55 @@ body {
 .death {
   background-color: HSLA(0, 71%, 45%, .7);
 }
+
+// Stats Bar
+
+.stats {
+  position: absolute;
+  height: 90px;
+  width: 100%;
+  padding: 1% 5%;
+  bottom: 0; right: 0; left: 0;
+  border-top: 3px solid white;
+  background-color: HSLA(0, 10%, 4%, .8);
+  overflow: auto;
+  text-align: center;
+  color: white;
+
+  h3 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+  }
+
+  .playerStats {
+    float: left;
+  }
+
+  .targetStats {
+    float: right;
+  }
+}
+
+.stats > div {
+  width: 20%;
+}
+
+.healthBar {
+  width: 100%;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 3px;
+  background-color: white;
+  overflow: auto;
+}
+
+.redline {
+  float: left;
+  background-color: red;
+  height: 100%;
+  width: 100%;
+}
+
 
 // Fight
 
@@ -185,53 +249,6 @@ body {
 
 .attack-deer {
   background-image: url('../images/deer-attack.png');
-}
-
-// Stats Bar
-
-.stats {
-  position: absolute;
-  height: 90px;
-  width: 100%;
-  padding: 1% 5%;
-  bottom: 0; right: 0; left: 0;
-  background-color: gray;
-  overflow: auto;
-  text-align: center;
-
-  h3 {
-    font-size: 1.6em;
-    color: black;
-    margin-bottom: 10px;
-  }
-
-  .playerStats {
-    float: left;
-  }
-
-  .targetStats {
-    float: right;
-  }
-}
-
-.stats > div {
-  width: 20%;
-}
-
-.healthBar {
-  width: 100%;
-  height: 20px;
-  border: 1px solid white;
-  border-radius: 3px;
-  background-color: white;
-  overflow: auto;
-}
-
-.redline {
-  float: left;
-  background-color: red;
-  height: 100%;
-  width: 100%;
 }
 
 // Level scenery
